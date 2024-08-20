@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de QR y Código de Barras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Generador de QR y Código de Barras</h1>
+    <input type="text" id="textInput" placeholder="Ingresa texto para generar" oninput="generateCode()">
+    
+    <div id="output">
+        <h3>Código QR:</h3>
+        <canvas id="qrCanvas"></canvas>
+        
+        <h3>Código de Barras:</h3>
+        <svg id="barcode"></svg>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <script>
+        function generateCode() {
+            const text = document.getElementById('textInput').value;
+            
+            // Generar QR Code
+            const qrCanvas = document.getElementById('qrCanvas');
+            QRCode.toCanvas(qrCanvas, text, function (error) {
+                if (error) console.error(error);
+            });
+
+            // Generar Código de Barras
+            JsBarcode("#barcode", text, {
+                format: "CODE128",
+                lineColor: "#000",
+                width: 2,
+                height: 50,
+                displayValue: true
+            });
+        }
+    </script>
+
+</body>
+</html>
