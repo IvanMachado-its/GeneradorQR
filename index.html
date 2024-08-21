@@ -259,6 +259,9 @@
                     massiveOutput.appendChild(codeBlock);
                 }
             });
+
+            // Limpiar el campo de texto después de generar los códigos
+            document.getElementById('massiveTextInput').value = '';
         }
 
         function showOverlay(codeText, qrCanvas) {
